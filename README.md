@@ -1,3 +1,5 @@
+### I. Write Spring Boot Restful with below conditions
+
 ## API Endpoint Breakdown
 
 ### Add a Car
@@ -37,7 +39,7 @@
     http://localhost:8080/cars/ask?name=Hyundai Sonata
     ```
 
-
+### II. Write SQL statement
 
 
 # Customer and Account Information
@@ -97,5 +99,41 @@ This data can be used for various purposes such as:
 - Analyzing customer data for business insights.
 - Integrating with other systems for customer relationship management.
 
-For more information or contributions, please refer to the repository.
+### Questions
 
+1. Count each branch how many accounts do they have?
+2. Find customers who have more than one account?
+3. Find customers who don’t have account yet?
+
+### SQL Queries
+
+To answer the questions above, you can use the following SQL queries:
+
+1. **Count each branch how many accounts do they have:**
+
+    ```sql
+    SELECT branchcode, COUNT(*) AS accountCount
+    FROM CUST_ACCOUNT_INFO
+    GROUP BY branchcode;
+    ```
+
+2. **Find customers who have more than one account:**
+
+    ```sql
+    SELECT CustomerNo, COUNT(*) AS AccountCount
+    FROM CUST_ACCOUNT_INFO
+    GROUP BY CustomerNo
+    HAVING COUNT(*) > 1;
+    ```
+
+3. **Find customers who don’t have an account yet:**
+
+    ```sql
+    SELECT c.CustomerNo, c.CustomerName
+    FROM CUSTOMER_INFO c
+    LEFT JOIN CUST_ACCOUNT_INFO a 
+    ON c.CustomerNo = a.CustomerNo
+    WHERE a.CustomerNo IS NULL;
+    ```
+
+For more information or contributions, please refer to the repository.
