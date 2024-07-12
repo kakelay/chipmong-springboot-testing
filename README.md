@@ -87,18 +87,6 @@ This repository contains two tables, `CUST_ACCOUNT_INFO` and `CUSTOMER_INFO`, de
 | 0000053     | CUST_12359    |
 | 0000099     | CUST_12360    |
 
-### Overview
-
-The `CUST_ACCOUNT_INFO` table includes details about various accounts held by customers, such as branch code, account number, account name, customer number, currency code, and account type. The `CUSTOMER_INFO` table provides information about customers, including customer number and customer name.
-
-### Usage
-
-This data can be used for various purposes such as:
-
-- Generating reports on customer accounts.
-- Analyzing customer data for business insights.
-- Integrating with other systems for customer relationship management.
-
 ### Questions
 
 1. Count each branch how many accounts do they have?
@@ -136,4 +124,3 @@ To answer the questions above, you can use the following SQL queries:
     WHERE a.CustomerNo IS NULL;
     ```
 
-For more information or contributions, please refer to the repository.
