@@ -1,42 +1,29 @@
-package co.kakelay.chipmong.controller;
 
+package co.kakelay.chipmong.controller;
 import co.kakelay.chipmong.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/cars")
-
 public class CarController {
 
     @Autowired
     private CarService carService;
 
-    @Autowired
-    private ApplicationContext context;
-
     @GetMapping("/ask")
-    public String askCarName(@RequestParam String name) {
-        if (name.equalsIgnoreCase("Bye")) {
-            new Thread(() -> {
-                try {
-                    Thread.sleep(500);
-                    // Wait for 500 millis before shutting down
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                SpringApplication.exit(context, () -> 0);
-            }).start();
-            return "Goodbye! Your application will shut down shortly.";
-        }
-        return carService.askCarName(name);
+    public ResponseEntity<List<String>> askCarName(@RequestParam String name) {
+        List<String> result = carService.askCarName(name);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/add")
-    public String addCar(@RequestParam String name, @RequestParam int wheels) {
-        return carService.addCar(name, wheels);
+    public ResponseEntity<Map<String, String>> addCar(@RequestParam String name, @RequestParam int wheels) {
+        Map<String, String> response = carService.addCar(name, wheels);
+        return ResponseEntity.ok(response);
     }
 }
